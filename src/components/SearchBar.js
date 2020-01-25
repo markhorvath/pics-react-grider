@@ -7,6 +7,15 @@ class SearchBar extends React.Component {
     // }
     state = { term: '' };
 
+    //using an arrow func makes 'this' refer to the correct object.  anytime you use the 'function' keyword you'll make 'this' undefined
+    //if it was just a regular function you'd have to use .bind(this) in a constructor
+    onFormSubmit = (e) => {
+        e.preventDefault();
+        //when the prop comes from a class component, we have to use this.props
+        //if it's a functional component we can just use props.whatever
+        this.props.onSubmit(this.state.term);
+    }
+
     //we leave the paranthesis off because otherwise it's automatically called whenever the component is rendered
     //by leaving them off we are passing a reference to this function to the input element so that the input can call it in the future
     //onChange is a special prop name for input elements.  similar to onClick and onSubmit.
@@ -14,7 +23,7 @@ class SearchBar extends React.Component {
     render() {
         return (
             <div className="ui segment">
-                <form className="ui form">
+                <form onSubmit={this.onFormSubmit} className="ui form">
                     <div className="field">
                     <label>Image Search</label>
 
