@@ -1,16 +1,18 @@
 import React from 'react';
+import './ImageList.css';
+import ImageCard from './ImageCard';
 
 const ImageList = props => {
-    //this is the destructured version, notice how often image was used in the commented-out code below
-    const images = props.images.map(({description, id, urls}) => {
-        return <img alt={description} key={id} src={urls.small} />
+
+    const images = props.images.map((image) => {
+        return <ImageCard key={image.id} image={image} />
     });
 
     // const images = props.images.map(image => {
     //     return <img alt={image.description} key={image.id} src={image.urls.small} />
     // });
 
-    return <div>{images}</div>
+    return <div className="image-list">{images}</div>
 }
 
 export default ImageList;

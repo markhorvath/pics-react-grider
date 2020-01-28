@@ -6,7 +6,7 @@ import ImageList from './ImageList';
 
 
 class App extends React.Component {
-    state = { images: [], url: '' };
+    state = { images: [] };
 
     //The code block below was the old way of doing something with the API data once the GET request finished
     // .then(response => {
@@ -26,8 +26,7 @@ class App extends React.Component {
         //if this happens in the future console.log(this) and see what this is referring to.  in this case it was referring
         //to onSubmit props object that gets passed to SearchBar, which calls onFormSubmit which references this.props.onSubmit which
         //is what this.setState here below was trying to update 'images' on, thus the error
-        this.setState({ images: response.data.results, url: response.data.results[0].urls.small });
-        console.log(typeof this.state.images[0].urls.small);
+        this.setState({ images: response.data.results });
 
     }
 
@@ -41,9 +40,7 @@ class App extends React.Component {
             <div className="ui container" style={{ marginTop: '10px' }}>
                 <SearchBar onSubmit={this.onSearchSubmit} />
                 <ImageList images={this.state.images} />
-                Found: {this.state.images.length} images.
 
-               <img src={this.state.url} />
 
             </div>
         )
